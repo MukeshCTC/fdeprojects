@@ -1,0 +1,10 @@
+# A local vector database for later modules: docker compose up -d / docker compose down
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.0          # pinned, like requirements.txt
+    ports:
+      - "${QDRANT_PORT:-6333}:6333"       # host:container; change QDRANT_PORT if 6333 is taken
+    volumes:
+      - qdrant_data:/qdrant/storage       # data survives `down`; `down -v` deletes it
+volumes:
+  qdrant_data:
